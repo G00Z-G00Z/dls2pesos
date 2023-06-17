@@ -1,8 +1,9 @@
-use dls2pesos::requests::{dls_2_pesos_rate, get_response, ApiError};
+use dls2pesos::requests::{dls_2_pesos_rate, get_api_reponse, get_conversion_url, ApiError};
 
 #[tokio::main]
 async fn main() -> Result<(), ApiError> {
-    let response = get_response().await.map_err(|e| {
+    let url = get_conversion_url("USD", "MXN");
+    let response = get_api_reponse(&url).await.map_err(|e| {
         eprintln!("Error: {:}", e);
         ApiError::BadRequest
     })?;

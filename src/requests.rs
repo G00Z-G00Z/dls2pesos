@@ -7,12 +7,20 @@ pub enum ApiError {
     BadRequest,
 }
 
-pub async fn get_response() -> Result<Value, reqwest::Error> {
-    let request_url = format!(
-        "http://api.freecurrencyapi.com/v1/latest?apikey={apiKey}&currencies=MXN",
+
+
+pub fn get_conversion_url(base : &str, to: &str) -> String  {
+    format!(
+        "http://api.freecurrencyapi.com/v1/latest?apikey={apiKey}&currencies={to}&base_currency={base}",
         apiKey = API_KEY,
-    );
-    let response = reqwest::get(&request_url)
+        base = base, 
+        to = to
+    )
+}
+
+
+pub async fn get_api_reponse(request_url : &str) -> Result<Value, reqwest::Error> {
+    let response = reqwest::get(request_url)
         .await?
         .json::<serde_json::Value>()
         .await?;
