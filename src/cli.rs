@@ -4,5 +4,5 @@ use clap::Parser;
 #[derive(Debug, Parser)]
 pub struct Args {
     /// Quantity of dollars to convert
-    pub quantity: u32,
+    pub quantity: f64,
 }

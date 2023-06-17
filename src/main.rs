@@ -17,7 +17,7 @@ async fn main() -> Result<(), ApiError> {
     println!(
         "{qty} USD = {pesos} MXN",
         qty = args.quantity,
-        pesos = (args.quantity as f64 * rate).ceil()
+        pesos = (args.quantity * rate).ceil()
     );
 
     Ok(())
